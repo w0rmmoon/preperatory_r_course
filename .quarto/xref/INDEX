@@ -1,0 +1,23 @@
+{
+  "01_Intro.qmd": {
+    "01_Intro.html": "68d41178"
+  },
+  "02_Vectors.qmd": {
+    "02_Vectors.html": "0f1366fb"
+  },
+  "03_Dataframes.qmd": {
+    "03_Dataframes.html": "b62d37c1"
+  },
+  "04_ReadingData.qmd": {
+    "04_ReadingData.html": "8e304bc0"
+  },
+  "05_PlottingPackages.qmd": {
+    "05_PlottingPackages.html": "f05a90cb"
+  },
+  "06_Packages.qmd": {
+    "06_Packages.html": "cf63592d"
+  },
+  "index.qmd": {
+    "index.html": "b74c7215"
+  }
+}

@@ -1,0 +1,20 @@
+project:
+  type: website
+
+website:
+  title: "Preperatory R Course 2026"
+  sidebar:
+    style: docked
+    contents:
+      - index.qmd
+      - 01_Intro.qmd
+      - 02_Vectors.qmd
+      - 03_Dataframes.qmd
+      - 04_ReadingData.qmd
+      - 05_PlottingPackages.qmd
+      - 06_Packages.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true

@@ -1,0 +1,13 @@
+filename: trees_louisiana.csv
+data source: US Department of Agriculture, Forest Service. Nationwide Forest Inventory (NFI).
+
+This dataset contains data on trees of three species from the U.S. nationwide forest inventory.
+Data was collected in Louisiana from 2023 to 2025. 
+
+# Column Description #
+Year: year of measurement
+Plot: plot of the measured tree
+Diameter: tree diameter [inches]
+Height: tree height [feet]
+Species: species name
+Status: Life status of tree; 0 - no info; 1 - alive; 2 - dead
