@@ -1,26 +1,30 @@
----
-title: "index"
-format: html
-editor: visual
----
+Welcome to the companion website for the Preperatory R Course 2026! This course is aimed at incoming students in the M.Sc. Forest and Ecosystem Sciences at the University of Göttingen.
 
-## Quarto
+The aim of this course is to introduce you to R, a programming language for statistical computing. No previous knowledge of R or programming is required. At the end of the class you will be able to read a dataset into R, perform summary statistics, reshape the data to fit your needs, and create a simple visual representation. You will also learn some simple programming concepts that go beyond data analysis.
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+## Motivation
 
-## Running Code
+Why do we use R instead of other data analysis programs like Excel or Stata? Programming may be intimidating at first, but R has many benefits:
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+- It is **reproducible,** meaning if someone has your code they can repeat every step of your analysis easily
+- It is **free** instead of requiring a subscription or purchase
+- It can deal with **large datasets** (hundreds of thousands of rows), including geospatial, genome, and other specialized data
+- It is **open-source** with a large library of user-created packages that can extend its functionality. This makes R really flexible - for example, all teaching material for this class (including this website) is created entirely in R.
 
-```{r}
-1 + 1
-```
+## Course Organization
 
-You can add options to executable code like this
+In addition to this website, you can download teaching material (scripts, exercises and solutions, data) on studIP.
 
-```{r}
-#| echo: false
-2 * 2
-```
+The course is intended to be taught in online live sessions from October 12 to October 16. We **strongly recommend** attending the live sessions if you have no previous experience with R! Unfortunately, they will not be recorded.
 
-The `echo: false` option disables the printing of code (only output is displayed).
+Every day covers two topics with a lunch break in between (see also the schedule pdf on studIP). The topic will first be introduced in a lecture by the tutor. You then have time to solve exercises with tutor assistance before the solutions are presented and discussed. Throughout the course, you always have the opportunities to ask questions to the tutors.
+
+## Self-Study of the course material
+
+If you can't make it to the live sessions, please self-study the material in your own time. This website is designed with the purpose of studying the material yourself in mind. Read through each topic, type the code examples into R to see how they work, and solve the exercises on studIP and you will be prepared for the semester.
+
+------------------------------------------------------------------------
+
+## Contact
+
+In case of questions about course formalities (such as issues with registration) please contact Katrin Meyer (kmeyer5\@uni-goettingen.de). For questions about the material or other issues arising during the course contact the main tutor Valentin Lorenz (valentin.lorenz\@stud.uni-goettingen.de).

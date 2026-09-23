@@ -1,5 +1,5 @@
 ---
-title: "Packages, lubridate & ggplot2"
+title: "6 - Packages, lubridate & ggplot2"
 format: html
 editor: visual
 ---

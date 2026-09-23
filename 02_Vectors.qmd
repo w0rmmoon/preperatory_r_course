@@ -1,5 +1,5 @@
 ---
-title: "Preperatory R Course - Topic Two"
+title: "2 - Vectors & Logical Expressions"
 format: html
 editor: visual
 ---

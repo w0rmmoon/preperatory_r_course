@@ -1,5 +1,5 @@
 ---
-title: "Data Wrangling"
+title: " 7 - Data Wrangling with base R and dplyr"
 editor: visual
 ---
 
