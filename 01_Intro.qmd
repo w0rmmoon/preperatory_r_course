@@ -4,28 +4,7 @@ format: html
 editor: visual
 ---
 
-## Organization of this Course
-
-Welcome! This course aims to teach the basics of R programming so you are prepared for the M.Sc. Forest and Ecosystem Sciences. Each day we are covering a different topic:
-
-1.  Getting started with R
-2.  Importing data, data frames, factors, data exploration
-3.  Using libraries, filtering data, rearranging data
-4.  Data visualization
-5.  Summary, Mini Project
-
-At the end of the class you should be able to read a dataset into R, perform summary statistics, extract relevant information from the data, and create a simple visual representation.
-
-For every topic, you have a pdf explaining the day's topic (what you are reading right now), an R script presenting all the code from the script, and an exercise where you can put your new skills into practice!
-
-## Motivation
-
-Many of you may be familiar with other means of statistical analysis (Excel, Stata...). Why do we use R instead? Programming may be intimidating at first, but R has many benefits:
-
-- It is **reproducible,** meaning if someone has your code they can repeat every step of your analysis easily
-- It is **free** instead of requiring a subscription or purchase
-- It can deal with large datasets (hundreds of thousands of rows), including geospatial, genome, and other specialized data
-- It is **open-source** with a large library of user-created packages that can extend its functionality. This makes R really flexible - for example, all teaching material for this class (including this pdf) is created in R.
+In this first lecture, we will introduce R and RStudio (the software we will be using in this course). We will then move on to using R as a calculator and saving simple objects of different data types.
 
 ## R & RStudio
 
