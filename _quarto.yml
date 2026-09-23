@@ -1,5 +1,6 @@
 project:
   type: website
+  output-dir: docs
 
 website:
   title: "Preperatory R Course 2026"
@@ -13,6 +14,7 @@ website:
       - 04_ReadingData.qmd
       - 05_PlottingPackages.qmd
       - 06_Packages.qmd
+      - 07_DataWrangling.qmd
 
 format:
   html:

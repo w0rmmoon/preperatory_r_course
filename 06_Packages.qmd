@@ -244,7 +244,7 @@ To save a ggplot object, you can use the function `ggsave()`. By default, it sav
 ggplot(iris, aes(x = Petal.Length)) +
   geom_histogram() +
   labs(y = "Count", x = "Length [cm]")
-ggsave("histogram.png")
+ggsave("histogram.png") # save histogram.png in root folder
 ```
 
 You can use the arguments `units`, `width`, and `height` to specify the dimensions of your saved plot. Units can be "in" (inches), "cm", "mm", or "px" (pixels).
