@@ -22,5 +22,11 @@
   },
   "07_DataWrangling.qmd": {
     "07_DataWrangling.html": "474b301f"
+  },
+  "08_ConditionalsIteration.qmd": {
+    "08_ConditionalsIteration.html": "8eea6427"
+  },
+  "09_Functions.qmd": {
+    "09_Functions.html": "254b42cb"
   }
 }

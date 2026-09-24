@@ -1,0 +1,121 @@
+---
+title: "09 - Writing your own functions"
+editor: visual
+---
+
+## Writing functions
+
+You have already learned about functions in R - ranging in complexity from `sum()` to `ggplot()`. In addition to the many functions included in R and packages, you can write your own functions. This is useful if there is code you need to reuse often in different parts of your scripts.
+
+To write your own functions, the syntax as follows:
+
+``` r
+my_function <- function(argument1, argument2){
+  code of the function
+  
+  return(return_value)
+}
+```
+
+The *return value* of a function is the new number created by a function - for example, the `sum()` function returns the sum of the values given to it. If you call `x <- my_function`, the return value will be assigned to x. However, functions are not required to have a return value. If you leave out the `return()` part, the function will simply return `NA`.
+
+The following code creates a function `multiply_numbers()` that takes as arguments two numbers (a and b) and returns the two multiplied together.
+
+```{r}
+multiply_numbers <- function(a, b){
+  result <- a * b
+  return(result)
+}
+```
+
+You can use your own functions as you would any other function in R.
+
+```{r}
+multiply_numbers(2, 3)
+```
+
+### Example: Calculating Species Diversity
+
+Consider that you have conducted a survey where you counted tree species at five different sites.
+
+```{r}
+survey <- data.frame(
+  site = c("A", "B", "C", "D", "E"),
+  oak = c(12, 0, 8, 20, 5),
+  maple = c(8, 15, 3, 0, 10),
+  birch = c(5, 2, 12, 4, 9),
+  pine = c(15, 18, 1, 0, 6)
+)
+str(survey)
+```
+
+Now you want to calculate a diversity index for each site to determine which one has the highest species diversity. We want to calculate Simpson's Diversity index, which is defined as:
+
+$$D = \sum_{i=1}^{S}(n_i/N)^2$$
+
+where `D` is the diversity index, `S` is the species richness, `N` is the number of individuals, and `n_i` is the number of individuals of a specific species. Already we can see that this is a mildly complex equation (no worries if you are unfamiliar with it - it isn't required prerequisite knowledge, just used here for illustrative purposes!). We therefore don't want to write it out for every site and should instead wrap it in a function.
+
+```{r}
+# function takes as arguments the species counts
+calculate_simpson_index <- function(counts){
+  species_richness = length(counts) # total number of species
+  number_individuals = sum(counts) # how many individuals are there in total?
+  proportions <- counts / number_individuals # calculate n_i / N
+  
+  # calculate the Simpson index
+  index <- sum(proportions**2)
+  
+  # return value is the index (single value)
+  return(index)
+}
+```
+
+We can then easily use this to calculate the species richness of individual sites:
+
+```{r}
+# calculate species richness for site A
+# we need to select column 2 - 5 since column 1 contains the site name
+calculate_simpson_index(survey[1, 2:5])
+
+# calculate species richness for site B
+calculate_simpson_index(survey[2, 2:5])
+```
+
+We can also use our own function as the function argument in `apply()` (see chapter 8) and in other places that accept base R functions, such as `dplyr::summarize()`.
+
+```{r}
+# loop over rows (MARGIN = 1)
+apply(survey[, 2:5], MARGIN = 1, calculate_simpson_index)
+```
+
+### Default Values
+
+Some functions in R have default values. For example, the function `round()` has an argument `digits` that specifies how many digits the value is rounded to. Per default, digits is set to 0, but it can be overwritten.
+
+```{r}
+# default value
+round(pi)
+
+# overwriting default value
+round(pi, digits = 2)
+```
+
+We can also give default values to our own functions. Consider the following function that returns `TRUE` if the given temperature is above the boiling temperature. By default, the boiling temperature is the boiling temperature of water (100 °C), but it can be changed so the function can be used for other substances.
+
+```{r}
+is_boiling <- function(temperature, threshold = 100){
+  # is temperature equal to/greater than boiling threshold?
+  boiling <- temperature >= threshold
+  return(boiling)
+}
+```
+
+```{r}
+temperature_measurement <- 60
+
+# default value
+is_boiling(temperature_measurement)
+
+# default value overwritten
+is_boiling(temperature_measurement, threshold = 30)
+```

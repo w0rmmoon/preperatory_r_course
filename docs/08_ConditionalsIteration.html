@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>08 - Conditionals and Iteration – Preperatory R Course 2026</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-787e033c7b6f65c9dfccb6078e5d2d34.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      Preperatory R Course 2026
+      </li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Preperatory R Course 2026</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Motivation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_Intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 - Introduction to R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_Vectors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 - Vectors &amp; Logical Expressions</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_Dataframes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 - Data Frames &amp; Factors</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_ReadingData.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4 - Reading in Data, Working Directories &amp; Projects</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_PlottingPackages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5 - Plotting in Base R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_Packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6 - Packages, lubridate &amp; ggplot2</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07_DataWrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7 - Data Wrangling with base R and dplyr</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#if-else" id="toc-if-else" class="nav-link active" data-scroll-target="#if-else">If &amp; Else</a>
+  <ul class="collapse">
+  <li><a href="#control-flow-ifelse" id="toc-control-flow-ifelse" class="nav-link" data-scroll-target="#control-flow-ifelse">Control Flow If/Else</a></li>
+  <li><a href="#ifelse" id="toc-ifelse" class="nav-link" data-scroll-target="#ifelse">ifelse()</a></li>
+  </ul></li>
+  <li><a href="#iteration" id="toc-iteration" class="nav-link" data-scroll-target="#iteration">Iteration</a>
+  <ul class="collapse">
+  <li><a href="#for-loop" id="toc-for-loop" class="nav-link" data-scroll-target="#for-loop">For Loop</a></li>
+  <li><a href="#apply" id="toc-apply" class="nav-link" data-scroll-target="#apply">Apply</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">08 - Conditionals and Iteration</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>For now, the course has focussed primarily on data analysis functions (plotting, data wrangling, reading in data). The next two chapters will have a slightly different focus: the control flow and structure of your code in R. These are important concepts in programming.</p>
+<section id="if-else" class="level2">
+<h2 class="anchored" data-anchor-id="if-else">If &amp; Else</h2>
+<section id="control-flow-ifelse" class="level3">
+<h3 class="anchored" data-anchor-id="control-flow-ifelse">Control Flow If/Else</h3>
+<p><code>If</code> is an important conditional in programming. Using an <code>if</code> structure, you can execute code only if a certain condition is true. An <code>if</code> structure has the following form:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(condition){</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># code to execute if true</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>An <code>If</code> statements there takes a single <code>TRUE/FALSE</code> value (or logical expression) called the “condition” and executes the code if the condition is TRUE. For example, the following code will print the text “It is freezing.” to the console only if the temperature is below 0.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>temperature <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">10</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(temperature <span class="sc">&lt;</span> <span class="dv">0</span>){</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"It is freezing."</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "It is freezing."</code></pre>
+</div>
+</div>
+<p>An <code>if</code> can be followed by an <code>else</code> block. The code in the <code>else</code> block will be executed when <code>if</code> is <code>FALSE.</code></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>temperature <span class="ot">&lt;-</span> <span class="dv">9</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(temperature <span class="sc">&lt;</span> <span class="dv">0</span>){</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"It is freezing."</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"It is not freezing."</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "It is not freezing."</code></pre>
+</div>
+</div>
+<p>You can use this to chain many if statements together (called <code>else if</code>). For example:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>temperature <span class="ot">&lt;-</span> <span class="dv">32</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(temperature <span class="sc">&lt;</span> <span class="dv">0</span>){</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"It is freezing."</span>) <span class="co"># executed if temperature is &lt; 0</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (temperature <span class="sc">&lt;</span> <span class="dv">30</span>){</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"It is not freezing."</span>) <span class="co"># executed if temperature is between 0 and 30</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"It is hot."</span>) <span class="co"># executed if temperature is &gt;= 30</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "It is hot."</code></pre>
+</div>
+</div>
+<p>The code inside of an <code>if</code> or <code>else</code> statement can be of any length - one line of code or hundreds. For example, the following code checks whether there are any issues with measured water quality. If there are, it gives a message and automatically calculates indicators that may be needed to further investigate the low water quality.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>water_quality <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">6.2</span>, <span class="fl">7.8</span>, <span class="fl">5.9</span>, <span class="fl">8.1</span>, <span class="fl">4.5</span>, <span class="fl">7.0</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">min</span>(water_quality) <span class="sc">&lt;</span> <span class="dv">5</span>) {</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Warning: at least one site has poor water quality"</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  worst_site_value <span class="ot">&lt;-</span> <span class="fu">min</span>(water_quality)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  summary_stats <span class="ot">&lt;-</span> <span class="fu">summary</span>(water_quality)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"All sites within acceptable range"</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Warning: at least one site has poor water quality"</code></pre>
+</div>
+</div>
+</section>
+<section id="ifelse" class="level3">
+<h3 class="anchored" data-anchor-id="ifelse">ifelse()</h3>
+<p>The If/Else statements introduced above can only take one conditional value. However, we often work with data frames or vectors which contain many observations! For example, consider the weather_goettingen.csv dataset.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/weather_goettingen.csv"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(weather)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   744 obs. of  8 variables:
+ $ Time        : chr  "01.08.2026 01:00" "01.08.2026 02:00" "01.08.2026 03:00" "01.08.2026 04:00" ...
+ $ PM10        : num  24.9 25 24.9 24.6 24.3 ...
+ $ Temperature : num  21.3 20.3 19.2 17.9 17 ...
+ $ Pressure    : num  993 993 994 994 994 ...
+ $ Windspeed   : num  0.35 0.52 0.63 0.6 0.46 0.34 0.39 0.52 0.48 0.61 ...
+ $ Humidity    : num  75.9 82.6 86.6 88.1 90 91 87.9 84.3 81.5 75.8 ...
+ $ RainDuration: int  0 1 0 7 5 0 0 0 0 0 ...
+ $ Radiation   : num  0 0 0 0 0 ...</code></pre>
+</div>
+</div>
+<p>Let’s say we want to add a column “precipitation” and assign it the label “raining” or “not raining” based on whether there is any precipitation. We might consider the following code, but see that it returns an error because the <strong>of condition</strong> (<code>weather$RainDuration &gt; 0</code>) is not a singular TRUE/FALSE value, but a vector.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(weather<span class="sc">$</span>RainDuration <span class="sc">&gt;</span> <span class="dv">0</span>){</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  weather<span class="sc">$</span>precipitation <span class="ot">&lt;-</span> <span class="st">"raining"</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  weather<span class="sc">$</span>precipitation <span class="ot">&lt;-</span> <span class="st">"not raining"</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in if (weather$RainDuration &gt; 0) {: Bedingung hat Länge &gt; 1</code></pre>
+</div>
+</div>
+<p>This is where the <code>ifelse()</code> function becomes relevant. The <code>ifelse()</code> function takes as arguments the <code>test</code>, a logical condition (like <code>weather$RainDuration &gt; 0</code>) and then assigns one of two values based on whether the condition is true or false.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># assigns "raining" if RainDuration is &gt; 0, "not raining" if it is not</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>weather<span class="sc">$</span>precipitation <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="at">test =</span> weather<span class="sc">$</span>RainDuration <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="at">yes =</span> <span class="st">"raining"</span>, <span class="at">no =</span> <span class="st">"not raining"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># column has been added to weather data frame</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(weather)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   744 obs. of  9 variables:
+ $ Time         : chr  "01.08.2026 01:00" "01.08.2026 02:00" "01.08.2026 03:00" "01.08.2026 04:00" ...
+ $ PM10         : num  24.9 25 24.9 24.6 24.3 ...
+ $ Temperature  : num  21.3 20.3 19.2 17.9 17 ...
+ $ Pressure     : num  993 993 994 994 994 ...
+ $ Windspeed    : num  0.35 0.52 0.63 0.6 0.46 0.34 0.39 0.52 0.48 0.61 ...
+ $ Humidity     : num  75.9 82.6 86.6 88.1 90 91 87.9 84.3 81.5 75.8 ...
+ $ RainDuration : int  0 1 0 7 5 0 0 0 0 0 ...
+ $ Radiation    : num  0 0 0 0 0 ...
+ $ precipitation: chr  "not raining" "raining" "not raining" "raining" ...</code></pre>
+</div>
+</div>
+<p>However, <code>ifelse()</code> can not include many lines of code. Since the distinction can sometimes be confusing, the table below summarizes main differences.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>If/Else</th>
+<th>ifelse()</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Input</td>
+<td>Single TRUE/FALSE value</td>
+<td>Vector of TRUE/FALSE values</td>
+</tr>
+<tr class="even">
+<td>Output</td>
+<td>Many output options, can run many lines of code</td>
+<td>Vector of the same length as input vector</td>
+</tr>
+<tr class="odd">
+<td>Main Use Case</td>
+<td>Controlling code flow, decision-making</td>
+<td>Assigning labels in data frames</td>
+</tr>
+</tbody>
+</table>
+<p>Note that the use cases above are only examples of the most commonly encountered ones. Be creative and you can find many other applications!</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can nest both If/Else and ifelse() statements inside each other; for example:</p>
+<p><code>ifelse(temperature &lt; 0, yes = "freezing", no = ifelse(temperature &lt; 30, yes = "normal", no = "hot"))</code></p>
+<p>… which assigns “freezing” to temperatures below 0; “normal” to temperatures between 0 and 30, and “hot” to temperatures above 30.</p>
+<p>However, you can see that this can quickly get confusing. If you are in a situation where you are nesting many ifs and elses, consider checking out the <code>case_when()</code> function from the dplyr package (not covered in this class).</p>
+</div>
+</div>
+</section>
+</section>
+<section id="iteration" class="level2">
+<h2 class="anchored" data-anchor-id="iteration">Iteration</h2>
+<section id="for-loop" class="level3">
+<h3 class="anchored" data-anchor-id="for-loop">For Loop</h3>
+<p>A <strong>for loop</strong> iterates over the items of a vector (or list, array, data frame column…) and executes the code within the loop repeatedly. For example, the following code loops over the vector 1:10. The loop is executed 10 times. In the first iteration, the variable <code>i</code> takes on the first value of the vector (1) and prints it to the console. In the second iteration, it takes on the second value (2), and so on, until the final value in the vector is reached (10).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>){</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6
+[1] 7
+[1] 8
+[1] 9
+[1] 10</code></pre>
+</div>
+</div>
+<p>The values within the vector can be any values; they do not have to start at 1 or be sequential, and they do not have to be numerical.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">7</span>, <span class="dv">9</span>, <span class="dv">0</span>, <span class="dv">12</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> numbers){</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i <span class="sc">**</span> <span class="dv">2</span>) <span class="co"># prints i²</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 49
+[1] 81
+[1] 0
+[1] 144</code></pre>
+</div>
+</div>
+<p>The name <code>i</code> for the so called <em>iterator</em> is conventional, but the iterator can take any name.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create data frame</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>heights <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="fu">c</span>(<span class="st">"Fagus Sylvatica"</span>, <span class="st">"Pinus Silvestris"</span>, <span class="st">"Betula pendula"</span>),</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">height =</span> <span class="fu">c</span>(<span class="fl">12.7</span>, <span class="fl">17.0</span>, <span class="fl">16.2</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># loop over entries in name column and print them to the console</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># here, the iterator is named "species"</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(species <span class="cf">in</span> heights<span class="sc">$</span>name){</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(species)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Fagus Sylvatica"
+[1] "Pinus Silvestris"
+[1] "Betula pendula"</code></pre>
+</div>
+</div>
+<p>For loops are especially useful to avoid repetitive code. While setting up the for loop requires a bit more work than copy-pasting, discovering bugs and making changes to the code <em>within</em> the loop is much easier if it exists only once in your script.</p>
+<p>For example, consider the Göttingen weather data. We are again using lubridate (chapter 6) to convert the time column into the POSIXct (datetime) format.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/weather_goettingen.csv"</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>weather<span class="sc">$</span>Time <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">dmy_hm</span>(weather<span class="sc">$</span>Time) <span class="co"># using lubridate:: to avoid loading the entire package</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(weather)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   744 obs. of  8 variables:
+ $ Time        : POSIXct, format: "2026-08-01 01:00:00" "2026-08-01 02:00:00" ...
+ $ PM10        : num  24.9 25 24.9 24.6 24.3 ...
+ $ Temperature : num  21.3 20.3 19.2 17.9 17 ...
+ $ Pressure    : num  993 993 994 994 994 ...
+ $ Windspeed   : num  0.35 0.52 0.63 0.6 0.46 0.34 0.39 0.52 0.48 0.61 ...
+ $ Humidity    : num  75.9 82.6 86.6 88.1 90 91 87.9 84.3 81.5 75.8 ...
+ $ RainDuration: int  0 1 0 7 5 0 0 0 0 0 ...
+ $ Radiation   : num  0 0 0 0 0 ...</code></pre>
+</div>
+</div>
+<p>If we want to calculate the mean of every column (except <code>Time</code>), we could of course simply repeat the code <code>mean(weather$var)</code> seven times. But that is tedious - especially if we imagine having a larger dataset with dozens of columns - and difficult to change if we later on decide we want to instead calculate the standard deviation, or change the name of the data frame.</p>
+<p>Instead, we can use a for loop to calculate the means. Since we want to know the means of column 2 to 8, we can loop over those numbers and use [square brackets] to access the columns by their number.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(column_number <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">8</span>){</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">mean</span>(weather[, column_number]))</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12.74924
+[1] 19.74321
+[1] 994.0759
+[1] 0.5963038
+[1] 67.5
+[1] 2.451613
+[1] 170.0863</code></pre>
+</div>
+</div>
+<p>This code is equivalent to:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">mean</span>(weather[, <span class="dv">2</span>]))</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">mean</span>(weather[, <span class="dv">3</span>]))</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">mean</span>(weather[, <span class="dv">4</span>]))</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">mean</span>(weather[, <span class="dv">5</span>]))</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">mean</span>(weather[, <span class="dv">6</span>]))</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">mean</span>(weather[, <span class="dv">7</span>]))</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">mean</span>(weather[, <span class="dv">8</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The code within the {curly brackets} can be as complex as you want. For example, we can use a for loop to create a plot for every variable using the same principle as above. We use a little trick for the y axis label: We use <code>names()</code> to access the column names and then select the name of the ith column.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set up grid for the plots</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>))</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># for loop for the plots</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">8</span>){</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">x =</span> weather<span class="sc">$</span>Time, <span class="at">y =</span> weather[, i], <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Time"</span>,</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="fu">names</span>(weather)[i]</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>       )</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="08_ConditionalsIteration_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="apply" class="level3">
+<h3 class="anchored" data-anchor-id="apply">Apply</h3>
+<p>The <code>apply()</code> function in R loops over the rows or columns of a data frame, similarly to the for loops shown above. Unlike a for loop, <code>apply()</code> does not require defining an iterating variable and no start or end of the loop; it will automatically loop over all columns/rows. <code>apply()</code> also has the benefit of being faster than a for loop for large data sets.</p>
+<p>Let’s load the built-in <code>trees</code> dataset in R.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(trees)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(trees)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   31 obs. of  3 variables:
+ $ Girth : num  8.3 8.6 8.8 10.5 10.7 10.8 11 11 11.1 11.2 ...
+ $ Height: num  70 65 63 72 81 83 66 75 80 75 ...
+ $ Volume: num  10.3 10.3 10.2 16.4 18.8 19.7 15.6 18.2 22.6 19.9 ...</code></pre>
+</div>
+</div>
+<p><code>apply()</code> takes three mandatory arguments: the dataset in question, <code>FUN</code> (the function to apply), and <code>MARGIN</code>. <code>MARGIN</code> defines whether <code>apply()</code> loops over the rows or columns of the data. 1 means rows, 2 means columns. Remember RoCo: Rows First, Columns Second.</p>
+<p>For example, to calculate the mean of every column:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(trees, <span class="at">MARGIN =</span> <span class="dv">2</span>, <span class="at">FUN =</span> mean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Girth   Height   Volume 
+13.24839 76.00000 30.17097 </code></pre>
+</div>
+</div>
+<p>You can also loop over rows instead. The following example calculates the sum of the values in each row.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(trees, <span class="at">MARGIN =</span> <span class="dv">1</span>, <span class="at">FUN =</span> sum)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  88.6  83.9  82.0  98.9 110.5 113.5  92.6 104.2 113.7 106.1 114.5 108.4
+[13] 108.8 102.0 106.1 109.1 131.7 126.7 110.4 102.7 126.5 125.9 124.8 126.3
+[25] 135.9 153.7 155.2 156.2 149.5 149.0 184.6</code></pre>
+</div>
+</div>
+<p>A downside of <code>apply()</code> is that it loops over <em>all</em> columns, even if the function does not make sense for the data type of a certain column. For example, if we apply the <code>mean()</code> function to the columns of our weather data frame, we encounter an error since the Time column is not numeric.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(weather, <span class="at">MARGIN =</span> <span class="dv">2</span>, <span class="at">FUN =</span> mean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in mean.default(newX[, i], ...): Argument ist weder numerisch noch
+boolesch: gebe NA zurück
+Warning in mean.default(newX[, i], ...): Argument ist weder numerisch noch
+boolesch: gebe NA zurück
+Warning in mean.default(newX[, i], ...): Argument ist weder numerisch noch
+boolesch: gebe NA zurück
+Warning in mean.default(newX[, i], ...): Argument ist weder numerisch noch
+boolesch: gebe NA zurück
+Warning in mean.default(newX[, i], ...): Argument ist weder numerisch noch
+boolesch: gebe NA zurück
+Warning in mean.default(newX[, i], ...): Argument ist weder numerisch noch
+boolesch: gebe NA zurück
+Warning in mean.default(newX[, i], ...): Argument ist weder numerisch noch
+boolesch: gebe NA zurück
+Warning in mean.default(newX[, i], ...): Argument ist weder numerisch noch
+boolesch: gebe NA zurück</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        Time         PM10  Temperature     Pressure    Windspeed     Humidity 
+          NA           NA           NA           NA           NA           NA 
+RainDuration    Radiation 
+          NA           NA </code></pre>
+</div>
+</div>
+<p>In this case, we have to use [square brackets] to select only the columns we want to apply the function to.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(weather[, <span class="dv">2</span><span class="sc">:</span><span class="dv">8</span>], <span class="at">MARGIN =</span> <span class="dv">2</span>, <span class="at">FUN =</span> mean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        PM10  Temperature     Pressure    Windspeed     Humidity RainDuration 
+  12.7492392   19.7432124  994.0759409    0.5963038   67.5000000    2.4516129 
+   Radiation 
+ 170.0862903 </code></pre>
+</div>
+</div>
+<p>To loop over a singular vector or data frame column, you can use the <code>sapply()</code> function instead. This function requires only the data and the function; the <code>MARGIN</code> argument is not necessary since vectors only have one margin.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the square root of numbers 1 - 10</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">FUN =</span> sqrt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490 2.645751 2.828427
+ [9] 3.000000 3.162278</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># round humidity values</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(weather<span class="sc">$</span>Humidity, <span class="at">FUN =</span> round)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1]  76  83  87  88  90  91  88  84  82  76  65  53  49  43  42  39  40  40
+ [19]  42  44  52  62  69  75  80  84  87  89  91  92  90  85  68  48  42  38
+ [37]  36  34  32  29  29  32  34  38  44  48  53  56  60  70  75  80  83  85
+ [55]  83  71  59  46  42  39  36  38  39  38  37  61  96  97  98  98  99  99
+ [73] 100 100 100  99  98  99  99  98  97  88  68  58  53  45  40  39  42  44
+ [91]  52  61  71  77  82  84  91  96  97  98  98  99  99  98  91  66  54  48
+[109]  43  42  40  42  42  45  51  54  65  75  82  86  87  87  88  89  78  75
+[127]  71  63  55  48  46  42  34  37  40  43  44  44  45  48  54  65  74  74
+[145]  74  82  86  88  90  91  89  78  67  59  52  46  45  45  50  52  51  49
+[163]  49  55  64  74  80  84  88  90  92  93  93  94  94  89  71  54  47  44
+[181]  39  36  34  33  32  34  36  39  42  43  44  50  58  67  73  77  81  83
+[199]  82  73  58  42  36  34  32  29  26  25  25  28  33  36  44  52  54  57
+[217]  60  62  63  68  71  74  72  60  44  36  34  34  29  27  27  33  47  50
+[235]  49  52  58  65  70  72  69  71  77  84  88  90  89  81  65  52  48  44
+[253]  41  37  35  34  34  36  39  44  52  61  69  73  77  81  82  85  87  89
+[271]  87  80  66  50  38  35  30  27  26  27  28  30  32  39  38  41  40  45
+[289]  57  64  68  73  77  80  78  66  53  38  30  27  23  19  20  21  21  22
+[307]  24  27  28  28  39  47  51  57  60  63  68  71  70  58  48  35  27  23
+[325]  21  20  19  18  18  20  24  33  38  46  51  54  57  60  64  65  67  68
+[343]  70  61  42  32  31  27  28  26  28  34  36  39  44  50  58  66  70  77
+[361]  82  86  84  81  82  84  85  81  75  66  59  56  51  47  44  45  48  50
+[379]  54  57  58  62  69  75  78  81  84  86  89  89  86  82  79  74  71  69
+[397]  77  72  72  76  76  80  74  81  93  95  96  97  97  98  98  98  99  99
+[415]  99  99  98  97  94  93  94  95  98  98  98  99  99  99  99  99  99 100
+[433]  99  99  99  99  99  99  98  98  98  98  97  90  81  78  79  63  64  74
+[451]  87  95  97  98  99  99  99 100 100 100 100 100 100 100  98  83  67  62
+[469]  60  51  44  43  46  45  47  60  69  72  67  75  83  84  87  91  93  95
+[487]  94  81  70  58  54  53  53  52  51  54  55  56  62  72  79  84  85  86
+[505]  86  88  93  94  96  97  97  97  95  82  77  65  55  46  45  43  51  48
+[523]  51  57  63  68  76  83  87  90  93  94  92  90  87  83  79  70  62  61
+[541]  56  53  50  52  50  52  57  69  80  84  89  91  93  94  95  96  96  97
+[559]  97  96  86  70  63  58  54  47  45  44  47  50  54  59  70  74  79  84
+[577]  80  86  90  85  90  94  93  76  66  57  51  46  41  38  38  38  39  43
+[595]  51  57  63  66  73  91  94  95  96  97  98  98  95  90  89  87  87  85
+[613]  84  82  81  78  82  82  83  84  85  88  93  95  97  98  98  98  99  99
+[631] 100  99  95  76  63  60  54  48  46  46  49  54  57  59  59  60  62  64
+[649]  65  68  68  68  75  91  94  92  84  73  65  66  66  68  68  67  71  88
+[667]  92  93  96  97  97  98  98  98  98  97  97  94  95  90  78  69  66  58
+[685]  57  54  53  54  50  51  54  56  63  64  64  64  66  68  72  74  74  74
+[703]  76  76  72  66  58  52  50  52  55  55  54  55  58  69  78  83  86  89
+[721]  91  91  90  92  93  91  89  85  84  71  65  63  56  55  59  67  65  73
+[739]  74  76  74  80  81  82</code></pre>
+</div>
+</div>
+<p>In both <code>apply()</code> and <code>sapply()</code>, you can supply arguments to the function <code>FUN</code> by adding them as arguments to <code>apply()</code>/<code>sapply()</code>. For example, you could round the humidity values to one decimal.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(weather<span class="sc">$</span>Humidity, <span class="at">FUN =</span> round, <span class="at">digits =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] 75.9 82.6 86.6 88.1 90.0 91.0 87.9 84.3 81.5 75.8 65.0 53.4 49.1 43.3 41.7
+ [16] 38.9 39.5 40.3 42.0 43.9 52.5 62.4 69.3 75.2 79.6 83.7 87.0 89.3 91.0 91.8
+ [31] 90.4 85.4 67.7 48.2 42.5 38.2 36.4 34.1 32.3 29.1 28.9 31.5 34.2 37.9 44.4
+ [46] 48.3 52.7 56.4 59.7 69.5 75.2 79.5 83.1 85.3 82.7 71.3 58.7 46.3 41.7 39.4
+ [61] 36.5 37.9 38.7 38.1 37.3 60.7 96.1 97.0 97.8 98.3 98.9 99.3 99.7 99.9 99.7
+ [76] 99.3 98.3 98.8 98.6 98.5 96.7 87.8 68.0 57.8 53.0 44.8 39.8 38.7 42.0 44.1
+ [91] 51.5 60.8 71.4 76.6 82.5 84.0 91.2 95.9 97.1 97.6 98.2 98.6 99.0 98.0 90.8
+[106] 65.7 54.3 48.2 42.8 41.5 39.7 41.7 42.2 44.7 51.2 54.1 65.2 75.0 82.1 86.1
+[121] 86.8 87.2 88.1 89.0 78.1 75.4 71.1 62.8 55.3 48.3 45.5 42.5 33.9 37.4 40.5
+[136] 42.9 44.1 44.0 45.2 47.9 53.9 65.4 73.6 74.0 74.1 81.7 85.5 88.0 90.0 91.2
+[151] 89.3 78.0 67.1 59.0 52.0 46.5 45.2 45.0 49.8 52.5 51.0 48.9 48.9 54.7 64.2
+[166] 74.3 79.8 84.5 87.9 90.5 92.1 93.3 93.0 93.8 94.2 89.4 70.8 53.6 46.9 43.5
+[181] 39.2 36.1 34.1 32.6 31.5 33.5 35.7 39.4 41.9 42.9 44.5 49.9 57.5 66.9 72.8
+[196] 77.1 80.6 83.0 81.9 72.8 57.7 42.4 36.5 34.4 32.2 29.2 25.6 24.7 25.1 28.4
+[211] 32.7 36.5 43.8 51.8 54.3 57.0 60.2 61.9 63.2 68.3 71.4 74.0 72.5 59.8 43.6
+[226] 36.3 34.1 34.0 29.1 27.1 27.1 32.9 46.8 50.3 49.2 52.4 58.2 65.3 70.3 72.3
+[241] 68.8 71.0 76.7 83.6 87.8 90.0 88.9 81.0 64.6 52.4 48.3 44.2 40.7 37.4 35.3
+[256] 34.5 34.5 36.0 38.7 43.9 51.8 61.1 68.6 72.6 77.2 80.6 82.3 84.8 87.4 88.7
+[271] 87.4 80.0 66.5 50.5 38.5 34.9 30.4 27.2 25.8 26.6 27.9 29.7 31.7 39.3 37.7
+[286] 40.8 40.5 44.6 57.2 63.9 67.8 73.4 76.9 80.2 78.2 66.3 52.9 37.6 30.0 27.1
+[301] 22.6 18.7 19.9 21.1 21.3 22.3 23.5 27.0 27.5 27.9 39.4 46.6 51.3 56.6 60.1
+[316] 63.0 68.0 71.0 70.2 58.3 48.1 34.9 27.3 23.1 20.7 20.0 18.8 17.9 18.4 19.9
+[331] 23.5 33.3 38.1 46.3 50.9 54.1 57.3 59.5 63.8 65.3 67.2 68.5 69.5 61.2 42.2
+[346] 32.1 30.7 27.1 27.8 25.7 27.9 33.5 35.8 39.1 44.1 49.6 57.7 65.7 69.7 77.1
+[361] 81.8 86.1 84.4 81.2 81.8 84.1 85.3 81.2 75.4 65.5 58.8 56.1 51.2 47.0 44.4
+[376] 45.0 47.7 49.7 53.6 56.9 58.1 62.5 69.1 74.9 77.5 80.8 83.8 86.4 88.6 88.9
+[391] 86.2 82.3 79.1 73.5 71.3 68.7 76.7 72.1 71.9 76.0 75.7 79.7 73.8 80.9 93.0
+[406] 95.4 96.4 97.1 97.4 98.0 98.3 98.5 98.8 99.1 99.0 98.8 98.1 96.7 94.3 93.3
+[421] 93.5 95.3 97.5 97.6 98.3 98.7 99.0 98.8 98.9 99.3 99.4 99.6 99.2 99.3 99.3
+[436] 99.4 99.1 99.0 98.2 98.0 98.1 98.0 97.2 89.9 80.6 78.1 78.7 63.3 63.5 74.5
+[451] 87.2 94.6 96.9 98.0 98.7 99.1 99.3 99.5 99.5 99.7 99.8 99.9 99.9 99.6 97.9
+[466] 82.8 67.0 62.3 60.1 51.1 44.3 42.9 45.5 45.2 47.0 59.5 69.4 72.0 66.8 75.0
+[481] 82.8 84.5 87.2 91.2 93.2 94.6 93.7 80.8 69.7 57.5 53.8 52.6 52.8 51.6 50.7
+[496] 53.5 54.6 56.3 61.9 72.4 78.8 84.3 85.2 85.5 86.0 87.9 92.7 93.9 95.7 96.7
+[511] 97.4 96.9 94.9 81.9 77.3 64.6 54.8 46.4 44.7 42.8 51.1 48.3 51.1 57.4 63.2
+[526] 68.0 76.3 83.0 87.0 90.2 92.7 94.3 91.9 89.8 87.0 83.2 78.7 69.9 62.5 60.8
+[541] 56.2 53.3 49.6 51.9 50.1 51.5 57.0 68.8 79.5 84.3 88.9 91.2 93.2 94.4 94.6
+[556] 95.5 96.4 96.6 96.9 96.2 85.6 70.4 63.1 58.3 54.3 47.4 44.8 43.9 47.3 50.2
+[571] 54.4 59.4 69.8 74.5 79.4 83.6 80.4 85.6 89.7 85.1 89.8 93.7 92.9 76.0 66.1
+[586] 57.3 51.4 46.2 41.1 38.2 37.8 37.9 39.4 43.2 51.4 56.6 63.2 66.1 72.7 90.8
+[601] 93.9 95.4 96.4 97.2 97.7 97.8 95.1 90.5 88.8 86.8 87.3 85.1 84.5 82.3 81.0
+[616] 78.1 81.7 81.8 82.8 83.9 85.1 88.1 93.1 95.4 96.7 97.6 98.1 98.5 98.9 99.3
+[631] 99.6 99.3 94.8 75.5 63.0 60.2 53.6 48.1 45.9 46.4 49.4 53.5 57.2 59.4 59.2
+[646] 59.5 61.5 63.7 64.9 67.8 68.0 68.0 75.1 90.9 94.3 91.5 84.0 72.7 65.1 65.9
+[661] 66.4 68.0 68.0 67.4 71.0 88.3 91.5 93.4 95.6 96.9 96.8 97.9 98.4 98.2 97.7
+[676] 97.2 96.6 93.7 94.6 90.0 78.1 69.1 65.6 58.4 56.8 54.2 52.7 53.6 50.3 50.8
+[691] 53.9 55.9 62.7 64.2 64.1 64.3 65.7 67.6 72.0 74.1 73.7 74.4 75.5 75.7 72.4
+[706] 66.2 58.2 51.7 50.2 52.3 55.0 55.4 54.3 55.1 58.4 68.9 77.8 82.7 86.3 89.2
+[721] 91.1 91.4 90.3 92.0 92.7 90.6 88.8 85.4 83.8 70.9 65.4 63.0 55.7 55.1 59.1
+[736] 67.4 64.9 72.7 74.5 75.8 73.5 79.9 81.4 82.0</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

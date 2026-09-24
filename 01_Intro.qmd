@@ -136,7 +136,7 @@ str(dbh)
 There are many different data types in R, but these are the three most important ones:
 
 | Name | Meaning | Example |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | numerical (num) | numbers (also often called "double" in other programming numbers) | `body_weight <- 15.3` |
 | character (chr) | text (also often called "string" in other languages). To assign a character value, put quotation marks around the text you want to save! | `species <- "canis lupus"` |
 | boolean/logical (logi) | can only take the values TRUE/FALSE | `adult <- TRUE` |

@@ -1,0 +1,12 @@
+---
+title: "10 - Data analysis project"
+editor: visual
+---
+
+Congratulations - you have (almost) reached the end of the course! There is no more new content beyond this point and if you have stuck with the course until now, you will be well-prepared for the first week of the semester.
+
+The final chapter is your own analysis of a new dataset. Please work through the tasks below. The goal of this class is not to memorize every single function: the use of your notes, the class material, and the internet to solve the tasks is encouraged.
+
+All tasks are answerable with the tools covered in the course, but if you feel uncertain with how to proceed, check the hints or ask a tutor.
+
+## The Dataset

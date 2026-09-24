@@ -1,0 +1,255 @@
+---
+title: "08 - Conditionals and Iteration"
+editor: visual
+---
+
+For now, the course has focussed primarily on data analysis functions (plotting, data wrangling, reading in data). The next two chapters will have a slightly different focus: the control flow and structure of your code in R. These are important concepts in programming.
+
+## If & Else
+
+### Control Flow If/Else
+
+`If` is an important conditional in programming. Using an `if` structure, you can execute code only if a certain condition is true. An `if` structure has the following form:
+
+``` r
+if(condition){
+  # code to execute if true
+}
+```
+
+An `If` statements there takes a single `TRUE/FALSE` value (or logical expression) called the "condition" and executes the code if the condition is TRUE. For example, the following code will print the text "It is freezing." to the console only if the temperature is below 0.
+
+```{r}
+temperature <- -10
+
+if(temperature < 0){
+  print("It is freezing.")
+}
+```
+
+An `if` can be followed by an `else` block. The code in the `else` block will be executed when `if` is `FALSE.`
+
+```{r}
+temperature <- 9
+
+if(temperature < 0){
+  print("It is freezing.")
+} else {
+  print("It is not freezing.")
+}
+```
+
+You can use this to chain many if statements together (called `else if`). For example:
+
+```{r}
+temperature <- 32
+
+
+if(temperature < 0){
+  print("It is freezing.") # executed if temperature is < 0
+} else if (temperature < 30){
+  print("It is not freezing.") # executed if temperature is between 0 and 30
+} else {
+  print("It is hot.") # executed if temperature is >= 30
+}
+```
+
+The code inside of an `if` or `else` statement can be of any length - one line of code or hundreds. For example, the following code checks whether there are any issues with measured water quality. If there are, it gives a message and automatically calculates indicators that may be needed to further investigate the low water quality.
+
+```{r}
+water_quality <- c(6.2, 7.8, 5.9, 8.1, 4.5, 7.0)
+
+if (min(water_quality) < 5) {
+  print("Warning: at least one site has poor water quality")
+  worst_site_value <- min(water_quality)
+  summary_stats <- summary(water_quality)
+} else {
+  print("All sites within acceptable range")
+}
+```
+
+### ifelse()
+
+The If/Else statements introduced above can only take one conditional value. However, we often work with data frames or vectors which contain many observations! For example, consider the weather_goettingen.csv dataset.
+
+```{r}
+weather <- read.csv("data/weather_goettingen.csv")
+str(weather)
+```
+
+Let's say we want to add a column "precipitation" and assign it the label "raining" or "not raining" based on whether there is any precipitation. We might consider the following code, but see that it returns an error because the **of condition** (`weather$RainDuration > 0`) is not a singular TRUE/FALSE value, but a vector.
+
+```{r, error=TRUE}
+if(weather$RainDuration > 0){
+  weather$precipitation <- "raining"
+} else {
+  weather$precipitation <- "not raining"
+}
+```
+
+This is where the `ifelse()` function becomes relevant. The `ifelse()` function takes as arguments the `test`, a logical condition (like `weather$RainDuration > 0`) and then assigns one of two values based on whether the condition is true or false.
+
+```{r}
+# assigns "raining" if RainDuration is > 0, "not raining" if it is not
+weather$precipitation <- ifelse(test = weather$RainDuration > 0, yes = "raining", no = "not raining")
+
+# column has been added to weather data frame
+str(weather)
+```
+
+However, `ifelse()` can not include many lines of code. Since the distinction can sometimes be confusing, the table below summarizes main differences.
+
+|   | If/Else | ifelse() |
+|------------------------|------------------------|------------------------|
+| Input | Single TRUE/FALSE value | Vector of TRUE/FALSE values |
+| Output | Many output options, can run many lines of code | Vector of the same length as input vector |
+| Main Use Case | Controlling code flow, decision-making | Assigning labels in data frames |
+
+Note that the use cases above are only examples of the most commonly encountered ones. Be creative and you can find many other applications!
+
+::: callout-tip
+You can nest both If/Else and ifelse() statements inside each other; for example:
+
+`ifelse(temperature < 0, yes = "freezing", no = ifelse(temperature < 30, yes = "normal", no = "hot"))`
+
+... which assigns "freezing" to temperatures below 0; "normal" to temperatures between 0 and 30, and "hot" to temperatures above 30.
+
+However, you can see that this can quickly get confusing. If you are in a situation where you are nesting many ifs and elses, consider checking out the `case_when()` function from the dplyr package (not covered in this class).
+:::
+
+## Iteration
+
+### For Loop
+
+A **for loop** iterates over the items of a vector (or list, array, data frame column...) and executes the code within the loop repeatedly. For example, the following code loops over the vector 1:10. The loop is executed 10 times. In the first iteration, the variable `i` takes on the first value of the vector (1) and prints it to the console. In the second iteration, it takes on the second value (2), and so on, until the final value in the vector is reached (10).
+
+```{r}
+for(i in 1:10){
+  print(i)
+}
+```
+
+The values within the vector can be any values; they do not have to start at 1 or be sequential, and they do not have to be numerical.
+
+```{r}
+numbers <- c(-7, 9, 0, 12)
+for(i in numbers){
+  print(i ** 2) # prints i²
+}
+```
+
+The name `i` for the so called *iterator* is conventional, but the iterator can take any name.
+
+```{r}
+# create data frame
+heights <- data.frame(
+  name = c("Fagus Sylvatica", "Pinus Silvestris", "Betula pendula"),
+  height = c(12.7, 17.0, 16.2)
+  )
+
+# loop over entries in name column and print them to the console
+# here, the iterator is named "species"
+for(species in heights$name){
+  print(species)
+}
+```
+
+For loops are especially useful to avoid repetitive code. While setting up the for loop requires a bit more work than copy-pasting, discovering bugs and making changes to the code *within* the loop is much easier if it exists only once in your script.
+
+For example, consider the Göttingen weather data. We are again using lubridate (chapter 6) to convert the time column into the POSIXct (datetime) format.
+
+```{r}
+weather <- read.csv("data/weather_goettingen.csv")
+weather$Time <- lubridate::dmy_hm(weather$Time) # using lubridate:: to avoid loading the entire package
+str(weather)
+```
+
+If we want to calculate the mean of every column (except `Time`), we could of course simply repeat the code `mean(weather$var)` seven times. But that is tedious - especially if we imagine having a larger dataset with dozens of columns - and difficult to change if we later on decide we want to instead calculate the standard deviation, or change the name of the data frame.
+
+Instead, we can use a for loop to calculate the means. Since we want to know the means of column 2 to 8, we can loop over those numbers and use \[square brackets\] to access the columns by their number.
+
+```{r}
+for(column_number in 2:8){
+  print(mean(weather[, column_number]))
+}
+```
+
+This code is equivalent to:
+
+```{r, eval = F}
+print(mean(weather[, 2]))
+print(mean(weather[, 3]))
+print(mean(weather[, 4]))
+print(mean(weather[, 5]))
+print(mean(weather[, 6]))
+print(mean(weather[, 7]))
+print(mean(weather[, 8]))
+```
+
+The code within the {curly brackets} can be as complex as you want. For example, we can use a for loop to create a plot for every variable using the same principle as above. We use a little trick for the y axis label: We use `names()` to access the column names and then select the name of the ith column.
+
+```{r}
+# set up grid for the plots
+par(mfrow = c(2, 4))
+
+# for loop for the plots
+for(i in 2:8){
+  plot(x = weather$Time, y = weather[, i], type = "l",
+       xlab = "Time",
+       ylab = names(weather)[i]
+       )
+}
+```
+
+### Apply
+
+The `apply()` function in R loops over the rows or columns of a data frame, similarly to the for loops shown above. Unlike a for loop, `apply()` does not require defining an iterating variable and no start or end of the loop; it will automatically loop over all columns/rows. `apply()` also has the benefit of being faster than a for loop for large data sets.
+
+Let's load the built-in `trees` dataset in R.
+
+```{r}
+data(trees)
+str(trees)
+```
+
+`apply()` takes three mandatory arguments: the dataset in question, `FUN` (the function to apply), and `MARGIN`. `MARGIN` defines whether `apply()` loops over the rows or columns of the data. 1 means rows, 2 means columns. Remember RoCo: Rows First, Columns Second.
+
+For example, to calculate the mean of every column:
+
+```{r}
+apply(trees, MARGIN = 2, FUN = mean)
+```
+
+You can also loop over rows instead. The following example calculates the sum of the values in each row.
+
+```{r}
+apply(trees, MARGIN = 1, FUN = sum)
+```
+
+A downside of `apply()` is that it loops over *all* columns, even if the function does not make sense for the data type of a certain column. For example, if we apply the `mean()` function to the columns of our weather data frame, we encounter an error since the Time column is not numeric.
+
+```{r}
+apply(weather, MARGIN = 2, FUN = mean)
+```
+
+In this case, we have to use \[square brackets\] to select only the columns we want to apply the function to.
+
+```{r}
+apply(weather[, 2:8], MARGIN = 2, FUN = mean)
+```
+
+To loop over a singular vector or data frame column, you can use the `sapply()` function instead. This function requires only the data and the function; the `MARGIN` argument is not necessary since vectors only have one margin.
+
+```{r}
+# calculate the square root of numbers 1 - 10
+sapply(1:10, FUN = sqrt)
+
+# round humidity values
+sapply(weather$Humidity, FUN = round)
+```
+
+In both `apply()` and `sapply()`, you can supply arguments to the function `FUN` by adding them as arguments to `apply()`/`sapply()`. For example, you could round the humidity values to one decimal.
+
+```{r}
+sapply(weather$Humidity, FUN = round, digits = 1)
+```
