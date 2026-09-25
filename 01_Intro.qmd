@@ -136,7 +136,7 @@ str(dbh)
 There are many different data types in R, but these are the three most important ones:
 
 | Name | Meaning | Example |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | numerical (num) | numbers (also often called "double" in other programming numbers) | `body_weight <- 15.3` |
 | character (chr) | text (also often called "string" in other languages). To assign a character value, put quotation marks around the text you want to save! | `species <- "canis lupus"` |
 | boolean/logical (logi) | can only take the values TRUE/FALSE | `adult <- TRUE` |
@@ -163,7 +163,7 @@ Logical/Boolean values only take on the values FALSE/TRUE (capitalization import
 
 ## Functions
 
-R provides many built-in functions (also sometimes called "commands"). We have already lerned about two functions: `ls()`, which lists all objects currently in the environment, and `str()`, which tells us the structure - including data type - of an object. In more technical terms, a function is a shortcut to a longer block of code. You can even write your own functions for code you want to reuse often (covered on the last day).
+R provides many built-in functions (also sometimes called "commands"). We have already lerned about two functions: `ls()`, which lists all objects currently in the environment, and `str()`, which tells us the structure - including data type - of an object. You can think of a function as an instruction to R - in the example of `str()`, that instruction is "take the object in the brackets and tell us about its data type and structure". You can even write your own functions for code you want to reuse often (covered on the last day).
 
 Base R contains hundreds of functions and you can include even more using packages (topic of lesson 6), so we will not provide a full overview of all functions, but just introduce the functionality and a few important examples.
 
