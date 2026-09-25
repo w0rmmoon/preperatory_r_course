@@ -5,8 +5,71 @@ editor: visual
 
 Congratulations - you have (almost) reached the end of the course! There is no more new content beyond this point and if you have stuck with the course until now, you will be well-prepared for the first week of the semester.
 
-The final chapter is your own analysis of a new dataset. Please work through the tasks below. The goal of this class is not to memorize every single function: the use of your notes, the class material, and the internet to solve the tasks is encouraged.
+The final chapter is your own analysis of a new dataset. Please work through the tasks below.
 
-All tasks are answerable with the tools covered in the course, but if you feel uncertain with how to proceed, check the hints or ask a tutor.
+The goal of this class is not to memorize every single function. Even experienced programmers don't remember everything, but frequently look things up as part of their process! Discussion with your classmates, the use of your notes and class material, and research on the internet to solve the tasks is explicitly encouraged.
 
 ## The Dataset
+
+The dataset for this chapter is `final-project.csv` in the data folder. The data is from the U.S. National Forest Inventory and summarizes the results of the inventory for for different years for 64 different counties in Louisiana, USA. The data contains the following columns:
+
+- country_code: number identifying the county
+- year: year of the survey
+- number_trees: total number of trees surveyed
+- trees_alive: number of surveyed trees that were alive
+- species_richness: number of species
+- diameter: mean tree diameter \[in inches\]
+- height: mean tree height \[in feet\]
+- region: inventory survey unit the county is located in
+
+## Tasks
+
+#### 1. Setup
+
+- Read in the file final-project.csv from the data folder.
+
+- How many observations are there?
+
+- What columns are there? What is their data type?
+
+- What time frame does the data cover?
+
+- Should any columns be converted into factors? If yes, do so.
+
+#### 2. Data Cleaning
+
+- Create a new dataset with only data from 2010 and later. Work with this dataset for all subsequent analysis.
+
+- Convert the "diameter" column to centimeters and the "height" column to meters.
+
+- Add a column with the percentage of alive trees.
+
+#### 3. Data Exploration
+
+- What is the highest and lowest species richness?
+
+- What is the average height and diameter of the trees?
+
+#### 4. Data Visualization
+
+- Create a scatter plot with the number of trees on the x axis and the species richness on the y axis. Visually distinguish the different regions. Add a legend and axes labels.
+
+- Create a line of the number of trees over time in county 1, 3, 5, and 7. Visually distinguish the different counties. Add a legend and axes labels.
+
+- Create a box plot comparing species richness in the different regions. Add axes labels.
+
+#### 5. Data Wrangling
+
+- Which region has the highest average tree height?
+
+- Which year has the lowest average percentage of alive trees?
+
+- Add a new column that has the value "warning" if there are \< 10 trees in a county and the value "no warning" otherwise.
+
+#### 6. Advanced
+
+- In what region are the most counties with less than 80% of surveyed trees alive?
+
+- Select the county with the highest species richness in 2025 and plot the development of species richness, number of trees, and tree height over time.
+
+- What county had the highest decline of species richness from 2010 to 2025? (Not including counties where data is unavailable for 2010 and/or 2025).

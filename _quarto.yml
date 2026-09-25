@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "Preperatory R Course 2026"
+  title: "Preparatory R Course 2026"
   sidebar:
     style: docked
     contents:
@@ -15,6 +15,9 @@ website:
       - 05_PlottingPackages.qmd
       - 06_Packages.qmd
       - 07_DataWrangling.qmd
+      - 08_ConditionalsIteration.qmd
+      - 09_Functions.qmd
+      - 10_FinalProject.qmd
 
 format:
   html:

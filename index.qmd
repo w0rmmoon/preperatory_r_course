@@ -1,4 +1,6 @@
-Welcome to the companion website for the Preperatory R Course 2026! This course is aimed at incoming students in the M.Sc. Forest and Ecosystem Sciences at the University of Göttingen.
+# Preparatory R Course
+
+Welcome to the companion website for the Preparatory R Course 2026! This course is aimed at incoming students in the M.Sc. Forest and Ecosystem Sciences at the University of Göttingen.
 
 The aim of this course is to introduce you to R, a programming language for statistical computing. No previous knowledge of R or programming is required. At the end of the class you will be able to read a dataset into R, perform summary statistics, reshape the data to fit your needs, and create a simple visual representation. You will also learn some simple programming concepts that go beyond data analysis.
 

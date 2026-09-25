@@ -1,0 +1,22 @@
+---
+title: "More R?"
+editor: visual
+---
+
+### Classes
+
+If you wish to go deeper into R, the following classes offered at the forestry faculty focus on R for different aspects (no guarantee that the list is complete):
+
+#### Winter Semester
+
+- M.FES.112: Biodiversity Measurement - R for ecology
+
+- M.FES.114: Ecosystem-Atmosphere Processes - R for process-based modelling
+
+- M.FES.115: Statistical Data Analysis with R - statistics (introduction)
+
+#### Summer Semester
+
+- M.FES.121: Advanced Data Analysis with R - statistics (advanced)
+
+- M.FES.124: Modern Concepts and Methods in Macroecology and Biogeography - ecology (advanced), spatial data
